@@ -62,7 +62,7 @@ class PostsViewModel : ViewModel() {
 
 
 
-    fun AddNewPicture(photoUri: Uri, photoDescription: String)
+    fun AddNewPicture(photoUri: Uri)
     {
         val firestoreDb = FirebaseFirestore.getInstance()
         val storageReference = FirebaseStorage.getInstance().reference
@@ -78,7 +78,7 @@ class PostsViewModel : ViewModel() {
             }.continueWithTask { downloadUrlTask ->
                 // Create a post object with the image URL and add that to the posts collection
                 val post = Post(
-                    photoDescription,
+                    "",
                     downloadUrlTask.result.toString(), // img url
                     System.currentTimeMillis(),
                     signedInUser

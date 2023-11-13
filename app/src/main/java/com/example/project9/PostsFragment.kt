@@ -40,6 +40,8 @@ class PostsFragment : Fragment() {
 
     var camActivityResultLauncher: ActivityResultLauncher<Uri>? = null
 
+    private var photoUri: Uri? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,12 +80,8 @@ class PostsFragment : Fragment() {
 
         camActivityResultLauncher = registerForActivityResult<Uri, Boolean>(
             ActivityResultContracts.TakePicture()) {
-
-            // once we've taken the pic
             val viewModel: PostsViewModel by activityViewModels()
-            //val photoUri = ""
-            //val photoDescription = ""
-            //viewModel.AddNewPicture(photoUri, photoDescription)
+            viewModel.AddNewPicture(photoUri!!)
         }
 
         binding.fabCreate.setOnClickListener {
@@ -94,15 +92,10 @@ class PostsFragment : Fragment() {
 
     fun OnPhoneShaken()
     {
-        // TODO: take pic and upload it to database
-        var file: File = context?.cacheDir!!
-        try {
-            val uuid = UUID.randomUUID().toString()
-            file = File.createTempFile(uuid, ".jpg", file)
-        } catch (e: IOException) {
-            return
-        }
-        val uri = FileProvider.getUriForFile(requireContext(), "com.package.name.fileprovider", file)
+        val outputDir = requireContext().cacheDir // context being the Activity pointer
+        val outputFile = File.createTempFile("tmp", ".jpg", outputDir)
+        val uri = FileProvider.getUriForFile(requireContext(), "com.package.name.fileprovider", outputFile)
+        photoUri = uri
         camActivityResultLauncher?.launch(uri)
     }
 

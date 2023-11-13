@@ -46,6 +46,8 @@ class LoginFragment : Fragment() {
                 btnLogin.isEnabled = true
                 if (task.isSuccessful) {
                     Toast.makeText(this.context, "Success!", Toast.LENGTH_SHORT).show()
+                    val viewModel : PostsViewModel by activityViewModels()
+                    viewModel.signedInUser = User(email)
                     goToPostsScreen(email)
                 } else {
                     Log.e(TAG, "signInWithEmail failed", task.exception)
