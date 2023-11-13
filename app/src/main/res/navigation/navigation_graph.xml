@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_postsFragment_to_createFragment"
             app:destination="@id/createFragment" />
+        <action
+            android:id="@+id/action_postsFragment_to_fullscreenFragment"
+            app:destination="@id/fullscreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -42,5 +45,17 @@
         <action
             android:id="@+id/action_createFragment_to_postsFragment"
             app:destination="@id/postsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullscreenFragment"
+        android:name="com.example.project9.FullscreenFragment"
+        android:label="fragment_fullscreen"
+        tools:layout="@layout/fragment_fullscreen" >
+        <action
+            android:id="@+id/action_fullscreenFragment_to_postsFragment"
+            app:destination="@id/postsFragment" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
     </fragment>
 </navigation>

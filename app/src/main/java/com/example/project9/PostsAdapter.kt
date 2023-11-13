@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -44,8 +45,8 @@ class PostsAdapter(val context: Context)
             binding.tvRelativeTime.text = DateUtils.getRelativeTimeSpanString(post.creationTimeMs)
             binding.ivPost.setOnClickListener {
                 // TODO: display image fullscreen
-                val imageView = binding.ivPost
-                
+                val action = PostsFragmentDirections.actionPostsFragmentToFullscreenFragment(post.imageUrl)
+                binding.root.findNavController().navigate(action)
             }
         }
         // get random image from gravatar for the user's profile image
