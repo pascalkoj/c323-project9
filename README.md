@@ -6,7 +6,17 @@ User can take pictures and save them to a database tide to their email to view l
 
 The following **required** functionality is completed:
 
-
+Uses Glide to display images
+Firebase storage to store image
+Firebase storage to retrieve images
+RecyclerView for displaying images
+No Toolbar
+General flow of the app.
+Application does not crash
+Appropriate comments
+CameraX Module
+README.md Should follow the structure of the attached README file.
+Firebase authentication
 
 The following **extensions** are implemented:
 

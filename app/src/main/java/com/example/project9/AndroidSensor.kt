@@ -5,6 +5,8 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 
+
+// interface that sensors can inherit from so they have unified api for getting sensor values
 abstract class MeasurableSensor(
     protected val sensorType: Int
 ) {

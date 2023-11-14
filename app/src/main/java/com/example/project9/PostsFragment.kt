@@ -58,11 +58,9 @@ class PostsFragment : Fragment() {
         viewModel.posts.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
-//                adapter.notifyDataSetChanged()
             }
         })
 
-        println("Setting up accelerometer")
         val sens = AccelerometerSensor(this.requireContext())
         sens.setOnSensorValuesChangedListener {a ->
             val x: Float = a[0]
@@ -73,21 +71,26 @@ class PostsFragment : Fragment() {
             val delta: Float = accelerometerData[0] - accelerometerData[1]
             accelerometerData[2] = accelerometerData[2] * 0.9f + delta
             if (accelerometerData[2] > 12) {
+                // this is when the phone is shaken a sufficient amount
                 OnPhoneShaken()
             }
         }
+        // make sure our sensor is listening for sensor values changed
         sens.startListening()
 
+        // register activity
         camActivityResultLauncher = registerForActivityResult<Uri, Boolean>(
             ActivityResultContracts.TakePicture()) {
             val viewModel: PostsViewModel by activityViewModels()
             viewModel.AddNewPicture(photoUri!!)
         }
 
+        // logout by going back to login screen
         binding.bLogout.setOnClickListener {
             view.findNavController().navigate(R.id.action_postsFragment_to_loginFragment)
         }
 
+        // upload image from camera roll
         binding.fabCreate.setOnClickListener {
           view.findNavController().navigate(R.id.action_postsFragment_to_createFragment)
         }
@@ -100,12 +103,13 @@ class PostsFragment : Fragment() {
         val outputFile = File.createTempFile("tmp", ".jpg", outputDir)
         val uri = FileProvider.getUriForFile(requireContext(), "com.package.name.fileprovider", outputFile)
         photoUri = uri
+        // launch the camera with a temporary file uri
         camActivityResultLauncher?.launch(uri)
     }
 
 }
 
-
+// to get accelerometer values
 class AccelerometerSensor(
     context: Context
 ): AndroidSensor(

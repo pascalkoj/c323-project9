@@ -16,9 +16,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
- * A simple [Fragment] subclass.
- * Use the [FullscreenFragment.newInstance] factory method to
- * create an instance of this fragment.
+ * A fragment to display an image fullscreen when the user clicks on a post
  */
 class FullscreenFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -42,6 +40,7 @@ class FullscreenFragment : Fragment() {
         // Inflate the layout for this fragment
         var args = FullscreenFragmentArgs.fromBundle(requireArguments())
         binding = FragmentFullscreenBinding.inflate(inflater, container, false)
+        // image url is passed through safeargs to this fragment
         Glide.with(requireContext()).load(args.imageUrl).into(binding.image)
         return binding.root
     }

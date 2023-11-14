@@ -26,9 +26,7 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         val auth = FirebaseAuth.getInstance()
-        if (auth.currentUser != null) {
-            //goToPostsScreen(auth.currentUser!!)
-        }
+
         val btnLogin = view.findViewById<Button>(R.id.btnLogin)
         btnLogin.setOnClickListener {
             btnLogin.isEnabled = false
@@ -42,7 +40,7 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
             val viewModel : PostsViewModel by activityViewModels()
-            // Firebase authentication check
+            // Firebase auth signin
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 btnLogin.isEnabled = true
                 if (task.isSuccessful) {
@@ -64,6 +62,7 @@ class LoginFragment : Fragment() {
         return view
     }
 
+    // set the user and go to posts screen to see their pictures
     private fun goToPostsScreen(email: String) {
         val viewModel : PostsViewModel by activityViewModels()
         viewModel.signedInUser = User(email)

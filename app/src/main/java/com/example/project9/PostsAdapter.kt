@@ -44,6 +44,7 @@ class PostsAdapter(val context: Context)
             Glide.with(context).load(getProfileImageUrl(username)).into(binding.ivProfileImage)
             binding.tvRelativeTime.text = DateUtils.getRelativeTimeSpanString(post.creationTimeMs)
             binding.ivPost.setOnClickListener {
+                // this is where the user clicks on a post - fullscreen display it
                 val action = PostsFragmentDirections.actionPostsFragmentToFullscreenFragment(post.imageUrl)
                 binding.root.findNavController().navigate(action)
             }
