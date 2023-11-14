@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_postsFragment_to_fullscreenFragment"
             app:destination="@id/fullscreenFragment" />
+        <action
+            android:id="@+id/action_postsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

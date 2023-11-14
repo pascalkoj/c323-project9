@@ -84,6 +84,10 @@ class PostsFragment : Fragment() {
             viewModel.AddNewPicture(photoUri!!)
         }
 
+        binding.bLogout.setOnClickListener {
+            view.findNavController().navigate(R.id.action_postsFragment_to_loginFragment)
+        }
+
         binding.fabCreate.setOnClickListener {
           view.findNavController().navigate(R.id.action_postsFragment_to_createFragment)
         }
@@ -98,27 +102,6 @@ class PostsFragment : Fragment() {
         photoUri = uri
         camActivityResultLauncher?.launch(uri)
     }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.toolbar.inflateMenu(R.menu.menu_posts)
-        binding.toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.menu_profile -> {
-                    // Navigate to profile screen.
-                    view.findNavController().navigate(R.id.action_postsFragment_to_profileFragment)
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
-
-
-
-
 
 }
 
